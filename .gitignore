@@ -101,3 +101,24 @@ ENV/
 env.bak/
 venv.bak/
 venv/
+
+
+# Python virtual environments
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Packaging
+*.egg-info/
+build/
+dist/
+
+# DVC cache (if needed)
+.dvc/cache/
