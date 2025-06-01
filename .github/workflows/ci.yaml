@@ -1,17 +1,3 @@
-## Used to create CI for github actions. 
-
-# STEPS:- 
-# 1. Define Stages 
-# - buliding 
-# - test 
-# - deploy etc
-
-# 2. Create Jobs:- each stages have one or more jobs 
-# 3. Specify Script - scripts are used to run the jobs 
-# 4. Use Docker image - useful for maintaining a consistent env
-# 5. define artifacts 
-
-
 name: CI Pipeline
 
 on: push
@@ -19,8 +5,6 @@ on: push
 jobs:
   project-testing:
     runs-on: ubuntu-latest
-    env:
-      CAPSTONEPROJECTMLPIPELINE: ${{ secrets.CAPSTONEPROJECTMLPIPELINE }}
 
     steps:
       - name: checkout code
@@ -45,17 +29,17 @@ jobs:
 
       - name: run pipeline
         env:
-          CAPSTONEPROJECTMLPIPELINE: ${{ secrets.CAPSTONEPROJECTMLPIPELINE }} #CAPSTONEPROJECTMLPIPELINE same name as of githubs action -> secreat key 
+          CAPSTONEPROJECTMLPIPELINE: ${{ secrets.CAPSTONEPROJECTMLPIPELINE }}
         run: |
           dvc repro
 
-      - name: Run model tests # if model passes this test then only further steps will execute.
+      - name: Run model tests
         env:
           CAPSTONEPROJECTMLPIPELINE: ${{ secrets.CAPSTONEPROJECTMLPIPELINE }}
         run: |
           python -m unittest tests/test_model.py
 
-      - name: Promote model to production # only execute after test pass 
+      - name: Promote model to production
         if: success()
         env:
           CAPSTONEPROJECTMLPIPELINE: ${{ secrets.CAPSTONEPROJECTMLPIPELINE }}
