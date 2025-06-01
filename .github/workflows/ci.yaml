@@ -19,6 +19,8 @@ on: push
 jobs:
   project-testing:
     runs-on: ubuntu-latest
+    env:
+      CAPSTONEPROJECTMLPIPELINE: ${{ secrets.CAPSTONEPROJECTMLPIPELINE }}
 
     steps:
       - name: checkout code
