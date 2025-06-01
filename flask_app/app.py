@@ -76,8 +76,8 @@ def normalize_text(text):
 
 # Below code block is for local use
 # -------------------------------------------------------------------------------------
-mlflow.set_tracking_uri('https://dagshub.com/sahilcreator07/End-to-End-ML-Pipeline.mlflow')
-dagshub.init(repo_owner='sahilcreator07', repo_name='End-to-End-ML-Pipeline', mlflow=True)
+# mlflow.set_tracking_uri('https://dagshub.com/sahilcreator07/End-to-End-ML-Pipeline.mlflow')
+# dagshub.init(repo_owner='sahilcreator07', repo_name='End-to-End-ML-Pipeline', mlflow=True)
 # -------------------------------------------------------------------------------------
 
 # Below code block is for production use
