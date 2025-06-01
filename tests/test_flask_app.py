@@ -1,6 +1,7 @@
 import unittest
 import os 
 from flask_app.app import app
+from flask import request
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,6 +18,9 @@ class FlaskAppTests(unittest.TestCase):
         self.assertIn(b'<title>Sentiment Analysis</title>', response.data)
 
     def test_predict_page(self):
+        token = request.headers.get("Authorization")
+        if token != f"Bearer {os.getenv('CAPSTONEPROJECTMLPIPELINE')}":
+            return "❗❗❗ AUTHORIZATION REQUIRED ❗❗❗", 401
         response = self.client.post('/predict', data=dict(text="I love this!"))
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
