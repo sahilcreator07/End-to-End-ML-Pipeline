@@ -1,11 +1,15 @@
 import unittest
+import os 
 from flask_app.app import app
+from dotenv import load_dotenv
+load_dotenv()
 
 class FlaskAppTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
         cls.client = app.test_client()
+        cls.token = os.getenv("CAPSTONEPROJECTMLPIPELINE")
 
     def test_home_page(self):
         response = self.client.get('/')
