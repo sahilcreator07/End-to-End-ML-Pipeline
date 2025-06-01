@@ -1,0 +1,54 @@
+## Used to create CI for github actions. 
+
+# STEPS:- 
+# 1. Define Stages 
+# - buliding 
+# - test 
+# - deploy etc
+
+# 2. Create Jobs:- each stages have one or more jobs 
+# 3. Specify Script - scripts are used to run the jobs 
+# 4. Use Docker image - useful for maintaining a consistent env
+# 5. define artifacts 
+
+
+name: CI Pipeline
+
+on: push
+
+jobs:
+  project-testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: run pipeline
+        env:
+          CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
+        run: |
+          dvc repro
+
+      - name: Run model tests
+        env:
+          CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
+        run: |
+          python -m unittest tests/test_model.py
