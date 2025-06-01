@@ -5,12 +5,17 @@
 
 import os
 import mlflow
+from dotenv import load_dotenv
+
+project_dir = os.path.join(os.path.dirname(__file__), os.pardir)
+dotenv_path = os.path.join(project_dir, '.env')
+load_dotenv(dotenv_path)
 
 def promote_model():
     # Set up DagsHub credentials for MLflow tracking
-    dagshub_token = os.getenv("CAPSTONE_TEST")
+    dagshub_token = os.getenv("CAPSTONEPROJECTMLPIPELINE")
     if not dagshub_token:
-        raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
+        raise EnvironmentError("CAPSTONEPROJECTMLPIPELINE environment variable is not set")
 
     os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
     os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
