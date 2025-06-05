@@ -3,6 +3,15 @@ End-to-End-Pipeline-Capstone
 
 A short description of the project.
 
+MLOps Pipeline Automation for Text Classification
+Tech Stack: Python, Git, DVC, MLflow, DagsHub, AWS, Prometheus, Grafana, Flask
+
+Implemented a complete modular MLOps pipeline with Git and DVC, automating workflows via dvc.yaml, and
+enabling experiment tracking using MLflow and DagsHub. Built microservices for each pipeline stage.
+Built and containerized a Flask-based ML inference app with Docker, deployed on AWS EKS using CI/CD via
+GitHub Actions, integrated S3 for data storage, ECR for image hosting, and IAM for secure access.
+Monitored model performance and application health using Prometheus and Grafana on EC2 instances.
+
 Project Organization
 ------------
 
