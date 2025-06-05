@@ -113,7 +113,7 @@ If the path points to your Anaconda environment (e.g., C:\Users\Personal\anacond
 aws eks --region us-east-1 update-kubeconfig --name flask-app-cluster (This ensures your kubectl is pointing to the correct cluster.)
 
 41. Check EKS Cluster Configuration Ensure you can access your EKS cluster by running
-    aws eks list-clusters
+    aws eks list-clusters --output json
 
 42. Delete cluster(optional):
     eksctl delete cluster --name flask-app-cluster --region us-east-1
